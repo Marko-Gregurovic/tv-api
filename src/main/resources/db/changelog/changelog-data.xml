@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="08042022-00" author="mharalovic">
+        <insert tableName="role">
+            <column name="id" value="1" />
+            <column name="name" value="user" />
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="2" />
+            <column name="name" value="editor" />
+        </insert>
+
+        <insert tableName="users">
+            <column name="id_role" value="1" />
+            <column name="email" value="pero.peric@gmail.com" />
+            <column name="password" value="pass1234" />
+        </insert>
+        <insert tableName="users">
+            <column name="id_role" value="2" />
+            <column name="email" value="editor@supernova.tv" />
+            <column name="password" value="pass1234" />
+        </insert>
+        <insert tableName="users">
+            <column name="id_role" value="2" />
+            <column name="email" value="editor@rlt.tv" />
+            <column name="password" value="pass1234" />
+        </insert>
+
+        <insert tableName="channel">
+            <column name="id_user" value="2" />
+            <column name="name" value="SuperNova TV" />
+            <column name="description" value="Super Nova Television" />
+        </insert>
+        <insert tableName="channel">
+            <column name="id_user" value="3" />
+            <column name="id_user" value="3" />
+            <column name="name" value="RLT" />
+            <column name="description" value="Radio Luxembourg's Television" />
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="movie" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="show" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="informative" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="series" />
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="sports" />
+        </insert>
+
+        <insert tableName="content">
+            <column name="id_channel" value="1" />
+            <column name="id_category" value="3" />
+            <column name="name" value="News" />
+            <column name="description" value="Newest news in the World" />
+            <column name="start_time" value="2022-05-01 19:00:00" />
+            <column name="end_time" value="2022-05-01 19:44:59" />
+        </insert>
+        <insert tableName="content">
+            <column name="id_channel" value="1" />
+            <column name="id_category" value="4" />
+            <column name="name" value="1001 Delights" />
+            <column name="description" value="Episode 3. Find out will Ayna fall in love with Ahmed." />
+            <column name="start_time" value="2022-05-01 19:45:00" />
+            <column name="end_time" value="2022-05-01 20:44:59" />
+        </insert>
+        <insert tableName="content">
+            <column name="id_channel" value="2" />
+            <column name="id_category" value="5" />
+            <column name="name" value="Liverpool vs Everton" />
+            <column name="description" value="Everton fights for survival in Premier league while Liverpool aims for the top." />
+            <column name="start_time" value="2022-05-01 21:00:00" />
+            <column name="end_time" value="2022-05-01 22:49:59" />
+        </insert>
+
+        <insert tableName="notification_type">
+            <column name="name" value="reminder" />
+        </insert>
+        <insert tableName="notification_type">
+            <column name="name" value="notification" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: username
+      POSTGRES_DB: tv-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - /private/var/lib/tv/postgresql:/var/lib/postgresql

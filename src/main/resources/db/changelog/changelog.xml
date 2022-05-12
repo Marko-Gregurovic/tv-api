@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="20220401-00" author="mharalovic">
+        <createTable tableName="role">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_role" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_role_name" />
+            </column>
+        </createTable>
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_editor" />
+            </column>
+            <column name="id_role" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_user_role" references="role(id)" />
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_user_email" />
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="channel">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_channel"/>
+            </column>
+            <column name="id_user" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_channel_user" references="users(id)" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_channel_name" />
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false" />
+            </column>
+            <column name="logo" type="TEXT">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="category">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_category"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_category_name" />
+            </column>
+        </createTable>
+        <createTable tableName="content">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_content" />
+            </column>
+            <column name="id_channel" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_content_channel" references="channel(id)" />
+            </column>
+            <column name="id_category" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_content_category" references="category(id)" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false" />
+            </column>
+            <column name="start_time" type="TIMESTAMP(0)">
+                <constraints nullable="false" />
+            </column>
+            <column name="end_time" type="TIMESTAMP(0)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="photo">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_photo"/>
+            </column>
+            <column name="id_content" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_photo_content" references="content(id)" />
+            </column>
+            <column name="base_64_string" type="TEXT">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="notification_type">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_notification_type"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_notification_type_name" />
+            </column>
+        </createTable>
+        <createTable tableName="notification">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_notification" />
+            </column>
+            <column name="id_content" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_notification_content" references="content(id)" />
+            </column>
+            <column name="id_notification_type" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_notification_notification_type" references="notification_type(id)" />
+            </column>
+            <column name="id_user" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_notification_user" references="users(id)" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

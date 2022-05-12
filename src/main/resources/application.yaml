@@ -1,0 +1,12 @@
+
+spring:
+  datasource:
+    password: password
+    username: username
+    url: jdbc:postgresql://localhost:5432/tv-db
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
+
+security:
+  jwtSecret: sda23r1
