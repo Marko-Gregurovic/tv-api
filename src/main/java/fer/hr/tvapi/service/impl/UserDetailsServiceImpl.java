@@ -2,6 +2,7 @@ package fer.hr.tvapi.service.impl;
 
 import fer.hr.tvapi.entity.Role;
 import fer.hr.tvapi.entity.Users;
+import fer.hr.tvapi.exception.NotFoundException;
 import fer.hr.tvapi.service.UserService;
 import fer.hr.tvapi.util.AuthenticatedUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<Users> userOptional = userService.findByEmail(email);
 
         if(userOptional.isEmpty()) {
-            throw new UsernameNotFoundException("User not found");
+            throw new NotFoundException("User not found");
         }
 
         Users user = userOptional.get();

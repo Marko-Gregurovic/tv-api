@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "users")
 @Data
@@ -27,5 +30,9 @@ public class Users {
   @ManyToOne
   @JoinColumn(name = "id_role")
   private Role role;
+
+  @OneToMany(mappedBy = "user")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  private List<Channel> channels;
 
 }

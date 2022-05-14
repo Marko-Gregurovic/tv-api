@@ -1,5 +1,6 @@
 package fer.hr.tvapi.config;
 
+import fer.hr.tvapi.exception.ExceptionHandlerFilter;
 import fer.hr.tvapi.filter.CorsCustomFilter;
 import fer.hr.tvapi.filter.JWTAuthenticationFilter;
 import fer.hr.tvapi.filter.JWTAuthorizationFilter;
@@ -47,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .addFilter(new JWTAuthenticationFilter(authenticationManager(), userService, jwtSecret))
             .addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService, userService, jwtSecret))
+            .addFilterBefore(new ExceptionHandlerFilter(), JWTAuthenticationFilter.class)
             .addFilterBefore(corsCustomFilter, JWTAuthenticationFilter.class)
             .authorizeRequests()
             .antMatchers("/register", "/login").permitAll()
