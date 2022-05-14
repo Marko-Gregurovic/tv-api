@@ -5,11 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "users")
 @Data
@@ -28,7 +24,8 @@ public class Users {
   @Column(name = "password", nullable = false)
   private String password;
 
-  @Column(name = "id_role", nullable = false)
-  private Long roleId;
+  @ManyToOne
+  @JoinColumn(name = "id_role")
+  private Role role;
 
 }

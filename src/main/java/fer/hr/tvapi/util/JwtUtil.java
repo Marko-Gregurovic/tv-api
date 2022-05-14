@@ -45,8 +45,7 @@ public class JwtUtil {
 
     public static String generateToken(AuthenticatedUser authenticatedUser, String secretKey) {
         Map<String, Object> claims = new HashMap<>();
-        // claims.put("roles", authenticatedUser.getAuthorities());
-        // TODO - integrate roles in jwt to allow automatic logout on role change
+        claims.put("roles", authenticatedUser.getAuthorities());
         return createToken(claims, authenticatedUser.getUsername(), secretKey); // username is actually email
     }
 

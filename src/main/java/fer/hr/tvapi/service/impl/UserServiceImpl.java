@@ -1,7 +1,9 @@
 package fer.hr.tvapi.service.impl;
 
+import fer.hr.tvapi.entity.Role;
 import fer.hr.tvapi.entity.Users;
 import fer.hr.tvapi.exception.EmailAlreadyExistsException;
+import fer.hr.tvapi.repository.RoleRepository;
 import fer.hr.tvapi.repository.UserRepository;
 import fer.hr.tvapi.service.UserService;
 import org.slf4j.Logger;
@@ -18,6 +20,8 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private UserRepository userRepository;
 
+  @Autowired
+  private RoleRepository roleRepository;
 
   private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -35,8 +39,9 @@ public class UserServiceImpl implements UserService {
     }
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
+    Role role = roleRepository.getById(1L);
     // user
-    user.setRoleId(1L);
+    user.setRole(role);
 
     user = userRepository.save(user);
     LOGGER.info("Successfully created User with id: {}", user.getId());
