@@ -15,4 +15,12 @@ public interface ChannelService {
 
     List<ChannelDto> getAllChannelDtos(Principal principal);
 
+    ChannelDto getChannelDtoById(Long channelId);
+
+    List<Channel> getAllChannelsForEditor(Principal principal, Long editorId);
+    List<ChannelDto> getAllChannelDtosForEditor(Principal principal, Long editorId);
+
+    void deleteById(Principal principal, Long channelId);
+    List<Channel> getAllChannelsForAuthenticatedUser(Principal principal);
+    public List<ChannelDto> getAllChannelDtosForAuthenticatedUser(Principal principal);
 }

@@ -1,5 +1,6 @@
 package fer.hr.tvapi.controller;
 
+import com.sun.xml.bind.v2.TODO;
 import fer.hr.tvapi.dto.ChannelDto;
 import fer.hr.tvapi.dto.CreateChannelDto;
 import fer.hr.tvapi.service.ChannelService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.util.List;
 
@@ -37,6 +39,20 @@ public class ChannelController {
         return ResponseEntity.ok(channelService.getAllChannelDtos(principal));
     }
 
+    @GetMapping("/{channelId}")
+    public ResponseEntity<ChannelDto> getChannelById(Principal principal, @PathVariable @NotNull Long channelId) {
+        return ResponseEntity.ok(channelService.getChannelDtoById(channelId));
+    }
 
+    @DeleteMapping("/{channelId}")
+    public ResponseEntity<Void> deleteChannelById(Principal principal, @PathVariable @NotNull Long channelId) {
+        channelService.deleteById(principal, channelId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/owned")
+    public ResponseEntity<List<ChannelDto>> getAllOwnedChannels(Principal principal) {
+        return ResponseEntity.ok(channelService.getAllChannelDtosForAuthenticatedUser(principal));
+    }
 
 }

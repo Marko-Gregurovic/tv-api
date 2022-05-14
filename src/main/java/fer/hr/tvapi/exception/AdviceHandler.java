@@ -31,7 +31,7 @@ public class AdviceHandler {
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .message(exception.getMessage())
                 .build();
-        return ResponseEntity.badRequest().body(errorDto);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
     }
 
     @ExceptionHandler(ForbiddenException.class)

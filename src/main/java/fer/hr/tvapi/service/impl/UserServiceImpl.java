@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public Optional<Users> findById(Long id) {
+    return userRepository.findById(id);
+  }
+
+  @Override
   public Users createUser(Users user) {
     if (findByEmail(user.getEmail()).isPresent()) {
       LOGGER.error("Cannot create User beacause email is already taken: {} ", user.getEmail());

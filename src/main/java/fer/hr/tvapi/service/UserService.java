@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface UserService {
 
-  public Optional<Users> findByEmail(String email);
+  Optional<Users> findByEmail(String email);
+
+  Optional<Users> findById(Long id);
 
   Users createUser(Users user);
 
