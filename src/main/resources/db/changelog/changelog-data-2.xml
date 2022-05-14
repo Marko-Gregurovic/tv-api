@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="14052022-00" author="mgregurovic">
+
+        <update catalogName="liquibase"
+                schemaName="public"
+                tableName="users">
+            <column name="password" value="$2a$10$CIXhD3CWiH6UXZrYu8Xtie./8rRp4BsfdK9R0uDJVKhMSP/Z2IB4a"/>
+            <where>email='pero.peric@gmail.com'</where>
+        </update>
+
+        <update catalogName="liquibase"
+                schemaName="public"
+                tableName="users">
+            <column name="password" value="$2a$10$q78Q6SE2c3euZ.PFkJHfr.mQNB502aeKIlm4qotLwUHioEim2Rg36"/>
+            <where>email='editor@supernova.tv'</where>
+        </update>
+
+        <update catalogName="liquibase"
+                schemaName="public"
+                tableName="users">
+            <column name="password" value="$2a$10$CIXhD3CWiH6UXZrYu8Xtie./8rRp4BsfdK9R0uDJVKhMSP/Z2IB4a"/>
+            <where>email='pero.peric@gmail.com'</where>
+        </update>
+        <update catalogName="liquibase"
+                schemaName="public"
+                tableName="users">
+            <column name="password" value="$2a$10$OUITYnUmiEIIMAGRJ0pz5O1lJ86UOUfW9kpqxrhzDQzEJH4/2t3Zq"/>
+            <where>email='editor@rlt.tv'</where>
+        </update>
+
+    </changeSet>
+</databaseChangeLog>
