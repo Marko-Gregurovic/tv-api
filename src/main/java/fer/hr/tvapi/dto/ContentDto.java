@@ -5,13 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class ChannelDto {
+public class ContentDto {
 
     private Long id;
 
@@ -19,8 +19,8 @@ public class ChannelDto {
 
     private String description;
 
-    private String logo;
+    private String startTime;
 
-    private List<ContentDto> contentList;
+    private String endTime;
 
 }

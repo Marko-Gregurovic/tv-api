@@ -5,15 +5,13 @@ import fer.hr.tvapi.dto.CreateChannelDto;
 import fer.hr.tvapi.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
-@RequestMapping("/channel")
+@RequestMapping("/channels")
 public class ChannelController {
 
     private final ChannelService channelService;
@@ -33,5 +31,12 @@ public class ChannelController {
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    public ResponseEntity<List<ChannelDto>> getAllChannels(Principal principal) {
+        return ResponseEntity.ok(channelService.getAllChannelDtos(principal));
+    }
+
+
 
 }

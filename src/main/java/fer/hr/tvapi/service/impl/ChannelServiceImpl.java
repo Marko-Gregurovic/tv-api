@@ -1,10 +1,12 @@
 package fer.hr.tvapi.service.impl;
 
+import fer.hr.tvapi.dto.ChannelDto;
 import fer.hr.tvapi.dto.CreateChannelDto;
 import fer.hr.tvapi.entity.Channel;
 import fer.hr.tvapi.entity.Users;
 import fer.hr.tvapi.exception.BadRequestException;
 import fer.hr.tvapi.exception.ForbiddenException;
+import fer.hr.tvapi.mapper.ChannelMapper;
 import fer.hr.tvapi.repository.ChannelRepository;
 import fer.hr.tvapi.service.ChannelService;
 import fer.hr.tvapi.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 public class ChannelServiceImpl implements ChannelService {
@@ -45,5 +48,15 @@ public class ChannelServiceImpl implements ChannelService {
                 .build();
 
         return channelRepository.save(channel);
+    }
+
+    @Override
+    public List<Channel> getAllChannels(Principal principal) {
+        return channelRepository.findAll();
+    }
+
+    @Override
+    public List<ChannelDto> getAllChannelDtos(Principal principal) {
+        return ChannelMapper.mapListToChannelDto(this.getAllChannels(principal));
     }
 }
