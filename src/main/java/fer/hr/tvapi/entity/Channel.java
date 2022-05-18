@@ -33,11 +33,11 @@ public class Channel {
 
     @ManyToOne
     @JsonIgnore
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     @JoinColumn(name = "id_user")
     private Users user;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "channel")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Content> contentList;

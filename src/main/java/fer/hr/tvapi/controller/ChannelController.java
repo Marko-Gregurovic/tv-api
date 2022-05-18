@@ -1,10 +1,9 @@
 package fer.hr.tvapi.controller;
 
-import com.sun.xml.bind.v2.TODO;
-import fer.hr.tvapi.dto.ChannelDto;
-import fer.hr.tvapi.dto.CreateChannelDto;
+import fer.hr.tvapi.dto.*;
 import fer.hr.tvapi.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,6 +52,12 @@ public class ChannelController {
     @GetMapping("/owned")
     public ResponseEntity<List<ChannelDto>> getAllOwnedChannels(Principal principal) {
         return ResponseEntity.ok(channelService.getAllChannelDtosForAuthenticatedUser(principal));
+    }
+
+    @PostMapping("{channelId}/contents")
+    public ResponseEntity<List<ContentDto>> createChannelContents(Principal principal, @PathVariable @NotNull Long channelId, @RequestBody List<ContentCreateDto> createChannelDtoList) {
+        List<ContentDto> channelDtoList = channelService.createChannelContents(principal, createChannelDtoList, channelId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(channelDtoList);
     }
 
 }

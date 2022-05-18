@@ -40,4 +40,9 @@ public class Content {
     @JoinColumn(name = "id_channel")
     private Channel channel;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "id_category")
+    private Category category;
+
 }

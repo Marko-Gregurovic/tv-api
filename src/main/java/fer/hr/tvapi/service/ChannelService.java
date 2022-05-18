@@ -1,7 +1,6 @@
 package fer.hr.tvapi.service;
 
-import fer.hr.tvapi.dto.ChannelDto;
-import fer.hr.tvapi.dto.CreateChannelDto;
+import fer.hr.tvapi.dto.*;
 import fer.hr.tvapi.entity.Channel;
 
 import java.security.Principal;
@@ -23,4 +22,10 @@ public interface ChannelService {
     void deleteById(Principal principal, Long channelId);
     List<Channel> getAllChannelsForAuthenticatedUser(Principal principal);
     public List<ChannelDto> getAllChannelDtosForAuthenticatedUser(Principal principal);
+
+    List<ContentDto> createChannelContents(Principal principal, List<ContentCreateDto> contentCreateRequestList, Long channelId);
+
+    ContentDto updateContent(Principal principal, ContentCreateDto contentCreateDto, Long contentId);
+
+    void deleteContentById(Principal principal, Long contentId);
 }
