@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="18052022-00" author="mgregurovic">
+
+        <addColumn schemaName= "public"
+                   tableName="category" >
+            <column name="description"
+                    type="TEXT"/>
+        </addColumn>
+
+        <update schemaName="public"
+                tableName="category">
+            <column name="description" value="A cinema film"/>
+            <where>name='movie'</where>
+        </update>
+
+        <update schemaName="public"
+                tableName="category">
+            <column name="description" value="a play or other stage performance, especially a musical"/>
+            <where>name='show'</where>
+        </update>
+
+        <update schemaName="public"
+                tableName="category">
+            <column name="description" value="An informative program"/>
+            <where>name='informative'</where>
+        </update>
+
+        <update schemaName="public"
+                tableName="category">
+            <column name="description" value="A group of episodes of a television program"/>
+            <where>name='series'</where>
+        </update>
+
+        <update schemaName="public"
+                tableName="category">
+            <column name="description" value="A sports program"/>
+            <where>name='sports'</where>
+        </update>
+
+    </changeSet>
+</databaseChangeLog>

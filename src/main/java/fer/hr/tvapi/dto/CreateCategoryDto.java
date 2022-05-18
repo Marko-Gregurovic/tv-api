@@ -5,16 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class ContentCreateRequest {
+public class CreateCategoryDto {
 
-    private Long channelId;
+    private Long categoryId;
 
-    private List<ContentCreateDto> contentList;
+    private String name;
+
+    private String description;
 
 }

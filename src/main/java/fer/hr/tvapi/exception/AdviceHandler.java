@@ -45,5 +45,16 @@ public class AdviceHandler {
         return ResponseEntity.badRequest().body(errorDto);
     }
 
+    @ExceptionHandler(ConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorDto> handleConflictException(HttpServletRequest req, Exception exception) {
+        ErrorDto errorDto = ErrorDto
+                .builder()
+                .statusCode(HttpStatus.CONFLICT.value())
+                .message(exception.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDto);
+    }
+
 
 }
