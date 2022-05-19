@@ -11,4 +11,6 @@ public interface CategoryService {
     CategoryDto createCategory(Principal principal, CreateCategoryDto createCategoryDto);
 
     List<CategoryDto> getAllCategories();
+
+    List<CategoryDto> searchCategories(String categoryName);
 }

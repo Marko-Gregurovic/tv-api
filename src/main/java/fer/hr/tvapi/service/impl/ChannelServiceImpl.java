@@ -22,6 +22,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ChannelServiceImpl implements ChannelService {
@@ -189,5 +190,16 @@ public class ChannelServiceImpl implements ChannelService {
         }
 
         contentRepository.delete(content);
+    }
+
+    @Override
+    public List<ChannelDto> searchChannels(Principal principal, String channelName) {
+
+        List<ChannelDto> channelDtoList = getAllChannelDtos(principal);
+
+        return channelDtoList
+                .stream()
+                .filter(channelDto -> channelDto.getName().toLowerCase().contains(channelName.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

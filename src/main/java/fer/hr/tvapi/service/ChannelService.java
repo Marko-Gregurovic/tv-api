@@ -28,4 +28,6 @@ public interface ChannelService {
     ContentDto updateContent(Principal principal, ContentCreateDto contentCreateDto, Long contentId);
 
     void deleteContentById(Principal principal, Long contentId);
+
+    List<ChannelDto> searchChannels(Principal principal, String channelName);
 }

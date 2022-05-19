@@ -38,7 +38,12 @@ public class ChannelController {
         return ResponseEntity.ok(channelService.getAllChannelDtos(principal));
     }
 
-    @GetMapping("/{channelId}")
+    @GetMapping("/search/{channelName}")
+    public ResponseEntity<List<ChannelDto>> getAllChannels(Principal principal, @PathVariable String channelName) {
+        return ResponseEntity.ok(channelService.searchChannels(principal, channelName));
+    }
+
+    @GetMapping("/byId/{channelId}")
     public ResponseEntity<ChannelDto> getChannelById(Principal principal, @PathVariable @NotNull Long channelId) {
         return ResponseEntity.ok(channelService.getChannelDtoById(channelId));
     }
