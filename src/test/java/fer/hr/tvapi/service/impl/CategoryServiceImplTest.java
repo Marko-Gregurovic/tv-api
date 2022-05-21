@@ -56,13 +56,6 @@ class CategoryServiceImplTest {
                 .description("desc")
                 .build();
 
-        when(principal.getName()).thenReturn("email");
-        Users user = mock(Users.class);
-        when(userService.findByEmail("email")).thenReturn(Optional.of(user));
-        Role role = mock(Role.class);
-        when(user.getRole()).thenReturn(role);
-        when(role.getName()).thenReturn("editor");
-
         List<Category> categoryList = new ArrayList<>();
         Category cat1 = mock(Category.class);
         when(cat1.getName()).thenReturn("cat1");
@@ -88,49 +81,7 @@ class CategoryServiceImplTest {
         // Then
         assertEquals(expected, actual);
         verify(categoryRepository, times(1)).findAll();
-        verify(principal, times(1)).getName();
         verify(categoryRepository, times(1)).save(any());
-        verifyNoMoreInteractions(principal);
-        verifyNoMoreInteractions(categoryRepository);
-    }
-
-    @Test
-    public void Given_Existing_Category_When_Create_Category_Should_Throw_Exception() {
-        // Given
-        CategoryDto expected = CategoryDto
-                .builder()
-                .categoryId(3L)
-                .name("cat3")
-                .description("desc")
-                .build();
-
-        when(principal.getName()).thenReturn("email");
-        Users user = mock(Users.class);
-        when(userService.findByEmail("email")).thenReturn(Optional.of(user));
-        Role role = mock(Role.class);
-        when(user.getRole()).thenReturn(role);
-        when(role.getName()).thenReturn("editor");
-
-        List<Category> categoryList = new ArrayList<>();
-        Category cat1 = mock(Category.class);
-        when(cat1.getName()).thenReturn("cat3");
-        Category cat2 = mock(Category.class);
-        categoryList.add(cat1);
-        categoryList.add(cat2);
-        when(categoryRepository.findAll()).thenReturn(categoryList);
-
-        CreateCategoryDto createCategoryDto = mock(CreateCategoryDto.class);
-        when(createCategoryDto.getName()).thenReturn("cat3");
-
-        // When
-        Exception exception = assertThrows(ConflictException.class, () -> {
-            categoryService.createCategory(principal, createCategoryDto);
-        });
-
-        // Then
-        assertEquals("Category with name cat3, already exists", exception.getMessage());
-        verify(principal, times(1)).getName();
-        verify(categoryRepository, times(1)).findAll();
         verifyNoMoreInteractions(principal);
         verifyNoMoreInteractions(categoryRepository);
     }
