@@ -17,15 +17,20 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  @Autowired
-  private RoleRepository roleRepository;
+  private final RoleRepository roleRepository;
+
 
   private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
   private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
+
+  @Autowired
+  public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    this.userRepository = userRepository;
+    this.roleRepository = roleRepository;
+  }
 
   public Optional<Users> findByEmail(String email) {
     return userRepository.findByEmail(email);
