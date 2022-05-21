@@ -27,6 +27,11 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.getAllCategories());
     }
 
+    @PatchMapping("/{categoryId}")
+    public ResponseEntity<CategoryDto> patchCategory(@PathVariable Long categoryId, @RequestBody CreateCategoryDto createCategoryDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(categoryId, createCategoryDto));
+    }
+
     @GetMapping("/search/{categoryName}")
     public ResponseEntity<List<CategoryDto>> getCategories(@PathVariable String categoryName) {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.searchCategories(categoryName));

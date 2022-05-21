@@ -65,4 +65,9 @@ public class ChannelController {
         return ResponseEntity.status(HttpStatus.CREATED).body(channelDtoList);
     }
 
+    @PatchMapping("/{channelId}")
+    public ResponseEntity<ChannelDto> patchChannel(@PathVariable Long channelId, @RequestBody CreateChannelDto createChannelDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(channelService.updateChannel(channelId, createChannelDto));
+    }
+
 }

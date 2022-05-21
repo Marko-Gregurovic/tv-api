@@ -1,6 +1,9 @@
 package fer.hr.tvapi.service.impl;
 
-import fer.hr.tvapi.dto.*;
+import fer.hr.tvapi.dto.ChannelDto;
+import fer.hr.tvapi.dto.ContentCreateDto;
+import fer.hr.tvapi.dto.ContentDto;
+import fer.hr.tvapi.dto.CreateChannelDto;
 import fer.hr.tvapi.entity.Category;
 import fer.hr.tvapi.entity.Channel;
 import fer.hr.tvapi.entity.Content;
@@ -201,5 +204,24 @@ public class ChannelServiceImpl implements ChannelService {
                 .stream()
                 .filter(channelDto -> channelDto.getName().toLowerCase().contains(channelName.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ChannelDto updateChannel(Long channelId, CreateChannelDto createChannelDto) {
+        Channel byId = channelRepository.getById(channelId);
+
+        if(createChannelDto.getName() != null) {
+            byId.setName(createChannelDto.getName());
+        }
+
+        if(createChannelDto.getDescription() != null) {
+            byId.setDescription(createChannelDto.getDescription());
+        }
+
+        if (createChannelDto.getLogo() != null) {
+            byId.setLogoBase64(createChannelDto.getLogo());
+        }
+
+        return ChannelMapper.mapToChannelDto(channelRepository.save(byId));
     }
 }

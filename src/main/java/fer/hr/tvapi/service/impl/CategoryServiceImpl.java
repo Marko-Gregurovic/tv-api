@@ -60,4 +60,19 @@ public class CategoryServiceImpl implements CategoryService {
                 .filter(channelDto -> channelDto.getName().toLowerCase().contains(categoryName.toLowerCase()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public CategoryDto updateCategory(Long categoryId, CreateCategoryDto createCategoryDto) {
+        Category byId = categoryRepository.getById(categoryId);
+
+        if(createCategoryDto.getName() != null) {
+            byId.setName(createCategoryDto.getName());
+        }
+
+        if(createCategoryDto.getDescription() != null) {
+            byId.setDescription(createCategoryDto.getDescription());
+        }
+
+        return CategoryMapper.mapToCategoryDto(categoryRepository.save(byId));
+    }
 }
