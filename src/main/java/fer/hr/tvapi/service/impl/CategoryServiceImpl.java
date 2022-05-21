@@ -31,12 +31,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto createCategory(Principal principal, CreateCategoryDto createCategoryDto) {
-        Users user = userService.findByEmail(principal.getName()).get();
-
-        if(!user.getRole().getName().equals("editor")) {
-            throw new ForbiddenException("Editor role required for category creation");
-        }
-
         List<Category> allCategories = categoryRepository.findAll();
         if (allCategories.stream().anyMatch(category -> category.getName().equals(createCategoryDto.getName()))) {
             throw new ConflictException(String.format("Category with name %s, already exists", createCategoryDto.getName()));
