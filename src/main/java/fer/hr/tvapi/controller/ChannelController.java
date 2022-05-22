@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/channels")
@@ -57,6 +58,14 @@ public class ChannelController {
     @GetMapping("/owned")
     public ResponseEntity<List<ChannelDto>> getAllOwnedChannels(Principal principal) {
         return ResponseEntity.ok(channelService.getAllChannelDtosForAuthenticatedUser(principal));
+    }
+
+    @GetMapping("/owned/search/{channelName}")
+    public ResponseEntity<List<ChannelDto>> searchAllOwnedChannels(Principal principal, @PathVariable String channelName) {
+        return ResponseEntity.ok(channelService.getAllChannelDtosForAuthenticatedUser(principal)
+                .stream()
+                .filter(channelDto -> channelDto.getName().toLowerCase().contains(channelName.toLowerCase()))
+                .collect(Collectors.toList()));
     }
 
     @PostMapping("{channelId}/contents")
