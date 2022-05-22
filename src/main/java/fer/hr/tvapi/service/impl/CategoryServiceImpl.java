@@ -8,6 +8,7 @@ import fer.hr.tvapi.exception.ConflictException;
 import fer.hr.tvapi.exception.ForbiddenException;
 import fer.hr.tvapi.mapper.CategoryMapper;
 import fer.hr.tvapi.repository.CategoryRepository;
+import fer.hr.tvapi.repository.ContentRepository;
 import fer.hr.tvapi.service.CategoryService;
 import fer.hr.tvapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,13 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final UserService userService;
 
+    private final ContentRepository contentRepository;
+
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository, UserService userService) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, UserService userService, ContentRepository contentRepository) {
         this.categoryRepository = categoryRepository;
         this.userService = userService;
+        this.contentRepository = contentRepository;
     }
 
     @Override
@@ -50,6 +54,20 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDto> getAllCategories() {
         return CategoryMapper.mapToCategoryDtosList(categoryRepository.findAll());
     }
+
+    @Override
+    public CategoryDto getById(Long categoryId) {
+        return CategoryMapper.mapToCategoryDto(categoryRepository.getById(categoryId));
+    }
+
+    @Override
+    public void deleteById(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).get();
+
+        contentRepository.deleteByCategoryId(categoryId);
+        categoryRepository.delete(category);
+    }
+
 
     @Override
     public List<CategoryDto> searchCategories(String categoryName) {

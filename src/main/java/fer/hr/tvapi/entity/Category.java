@@ -2,6 +2,8 @@ package fer.hr.tvapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +28,7 @@ public class Category {
 
     @OneToMany(mappedBy = "channel")
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ToString.Exclude
     private List<Content> contentList;
 

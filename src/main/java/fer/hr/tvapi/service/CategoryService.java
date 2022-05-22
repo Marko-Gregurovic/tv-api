@@ -12,6 +12,10 @@ public interface CategoryService {
 
     List<CategoryDto> getAllCategories();
 
+    CategoryDto getById(Long categoryId);
+
+    void deleteById(Long categoryId);
+
     List<CategoryDto> searchCategories(String categoryName);
 
     CategoryDto updateCategory(Long categoryId, CreateCategoryDto createCategoryDto);

@@ -7,6 +7,7 @@ import fer.hr.tvapi.entity.Role;
 import fer.hr.tvapi.entity.Users;
 import fer.hr.tvapi.exception.ConflictException;
 import fer.hr.tvapi.repository.CategoryRepository;
+import fer.hr.tvapi.repository.ContentRepository;
 import fer.hr.tvapi.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,9 +42,11 @@ class CategoryServiceImplTest {
 
     CategoryServiceImpl categoryService;
 
+    @Mock
+    ContentRepository contentRepository;
     @BeforeEach
     public void setUp() {
-        categoryService = new CategoryServiceImpl(categoryRepository, userService);
+        categoryService = new CategoryServiceImpl(categoryRepository, userService, contentRepository);
     }
 
     @Test
